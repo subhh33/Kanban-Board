@@ -8,41 +8,72 @@
     display: flex; /* Uses flexbox layout for vertical alignment of child elements. */
     flex-direction: column; /* Children are stacked vertically. */
     gap: 2.75%; /* Vertical space between child elements. */
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); /* Subtle gradient background */
+    border-radius: 12px; /* Rounded corners for modern look */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
+    padding: 16px; /* Padding inside the group container */
+    transition: all 0.3s ease; /* Smooth transitions for hover effects */
+    border: 1px solid #e9ecef; /* Subtle border */
+}
+
+.group:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+    transform: translateY(-2px); /* Slight lift effect */
 }
 
 .group__header {
     display: flex; /* Flexbox layout for horizontal alignment of header elements. */
     justify-content: space-between; /* Space distributed between header elements. */
-    padding: 0 2.5%; /* Horizontal padding within the header. */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 12px; /* Space below header */
+    padding-bottom: 8px; /* Padding below header */
+    border-bottom: 1px solid #dee2e6; /* Subtle separator line */
 }
 
 .group__information {
     display: flex; /* Flexbox layout for horizontal alignment of group info elements. */
     align-items: center; /* Centers items vertically within the flex container. */
-    gap: 15%; /* Horizontal space between information items. */
+    gap: 12px; /* Horizontal space between information items. */
 }
 
 .group__title {
     white-space: nowrap; /* Prevents the title from wrapping and keeps it on a single line. */
+    font-weight: 600; /* Semi-bold font weight */
+    font-size: 16px; /* Slightly larger font size */
+    color: #495057; /* Darker color for better readability */
 }
 
 .group__count {
-    color: gray; /* Sets the color of the item count to gray. */
+    background-color: #e9ecef; /* Light background for count badge */
+    color: #6c757d; /* Gray color for count */
+    padding: 2px 8px; /* Padding for badge */
+    border-radius: 12px; /* Rounded badge */
+    font-size: 12px; /* Smaller font for count */
+    font-weight: 500; /* Medium weight */
+}
+
+.group__actions {
+    display: flex; /* Flex container for actions */
+    align-items: center; /* Center vertically */
+    gap: 8px; /* Space between icons */
 }
 
 .group__actions > svg {
-    margin-left: max(
-        1vh,
-        9px
-    ); /* Left margin for SVG icons is responsive with a fixed minimum. */
-    color: dimgray; /* Color for the action icons. */
-    cursor: not-allowed; /* Indicates that the action is not currently available. */
-    font-size: larger; /* Larger font size for the icons for better visibility. */
-    height: 15.59px; /* Fixed height for the icons to maintain consistency. */
+    color: #6c757d; /* Consistent gray color */
+    cursor: pointer; /* Change to pointer for better UX */
+    font-size: 18px; /* Slightly larger icons */
+    padding: 4px; /* Padding for hover area */
+    border-radius: 4px; /* Rounded hover area */
+    transition: all 0.2s ease; /* Smooth transitions */
+}
+
+.group__actions > svg:hover {
+    background-color: #f8f9fa; /* Light background on hover */
+    color: #495057; /* Darker color on hover */
 }
 
 .group__tickets {
     display: flex; /* Flexbox layout for ticket items. */
     flex-direction: column; /* Ticket items are stacked vertically. */
-    gap: 1vh; /* Vertical space between individual tickets. */
+    gap: 12px; /* Vertical space between individual tickets. */
 }
