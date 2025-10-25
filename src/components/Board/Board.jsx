@@ -130,17 +130,33 @@ const Board = () => {
     return (
         <div className={classes.board}>
             {/* Main board container */}
-            {isLoading && <p>Loading...</p>}
-            {/* Display loading message while data is being fetched */}
-            {rawData &&
-                Object.keys(groupedAndOrderedData).map((groupKey) => (
-                    <Group
-                        key={groupKey}
-                        title={groupKey}
-                        data={groupedAndOrderedData[groupKey]}
-                    /> // Render a Group component for each group in the processed data
-                ))}
-            {error && <p>{error}</p>} {/* Display error message if any */}
+            <div className={classes.header}>
+                <h1>Kanban Board</h1>
+            </div>
+            {isLoading && (
+                <div className={classes.loading}>
+                    <div className={classes.spinner}></div>
+                    <p>Loading your tasks...</p>
+                </div>
+            )}
+            {rawData && (
+                <div className={classes.groupsContainer}>
+                    {Object.keys(groupedAndOrderedData).map((groupKey) => (
+                        <Group
+                            key={groupKey}
+                            title={groupKey}
+                            data={groupedAndOrderedData[groupKey]}
+                        /> // Render a Group component for each group in the processed data
+                    ))}
+                </div>
+            )}
+            {error && (
+                <div className={classes.error}>
+                    <h2>Oops! Something went wrong</h2>
+                    <p>{error}</p>
+                    <button onClick={fetchRawData} className={classes.retryButton}>Try Again</button>
+                </div>
+            )}
         </div>
     );
 };
