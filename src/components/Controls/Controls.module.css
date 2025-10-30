@@ -1,18 +1,22 @@
 /* Controls.module.css: Stylesheet for the control elements in the application. */
 
 .controls {
-    background: #fefffe; /* Light background color for the controls container. */
+    background: rgba(255, 255, 255, 0.05); /* Semi-transparent background for glass effect. */
+    backdrop-filter: blur(10px); /* Glass morphism effect. */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border. */
     height: max(
         6vh,
         54px
     ); /* Responsive height, larger of 6% viewport height or 54px. */
     display: flex; /* Flexbox display to align child elements in a row. */
     align-items: center; /* Centers child elements vertically within the container. */
+    padding: 0 24px; /* Horizontal padding. */
 }
 
 .controls__icon {
-    color: dimgray; /* Color for the icons within the controls. */
-    font-size: large; /* Larger font size for icons for better visibility. */
+    color: rgba(255, 255, 255, 0.7); /* Lighter color for icons for better contrast. */
+    font-size: 18px; /* Larger font size for icons for better visibility. */
+    transition: color 0.3s ease; /* Smooth color transition. */
 }
 
 .controls button {
@@ -20,20 +24,47 @@
         2.5%,
         36px
     ); /* Responsive left margin, larger of 2.5% viewport width or 36px. */
-    box-shadow: 0 0 5px 1px lightgray; /* Subtle shadow around the button for depth. */
-    font-size: inherit; /* Button font size inherits from parent element. */
-    border-radius: 5px; /* Rounded corners for the button. */
-    border: 1px solid lightgray; /* Light gray border around the button. */
-    background: #fefffe; /* Background color for the button matches the controls container. */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth. */
+    font-size: 14px; /* Consistent font size for buttons. */
+    border-radius: 10px; /* More rounded corners for modern look. */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border with transparency. */
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background. */
+    backdrop-filter: blur(5px); /* Glass effect. */
     display: flex; /* Flexbox display to align icon and text inside the button. */
-    font-weight: inherit; /* Button font weight inherits from parent. */
-    transition: background 0.3s ease; /* Smooth transition for background color on hover. */
+    font-weight: 500; /* Medium weight. */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Enhanced transition for all properties. */
     align-items: center; /* Aligns button contents vertically. */
-    gap: 5%; /* Space between items inside the button relative to its size. */
-    padding: 0.125% 0.375%; /* Responsive padding inside the button. */
+    gap: 8px; /* Fixed space between items inside the button. */
+    padding: 8px 16px; /* Consistent padding inside the button. */
     cursor: pointer; /* Changes the mouse cursor to indicate clickable items. */
+    color: rgba(255, 255, 255, 0.9); /* Light text color. */
+    position: relative;
+    overflow: hidden;
+}
+
+.controls button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
 }
 
 .controls button:hover {
-    background: #e8e8e8; /* Changes button background on hover for a visual feedback. */
+    background: rgba(255, 255, 255, 0.15); /* Slightly darker on hover. */
+    transform: translateY(-1px); /* Subtle lift effect. */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover. */
+    border-color: rgba(102, 126, 234, 0.3); /* Border color change on hover. */
+}
+
+.controls button:hover::before {
+    left: 100%; /* Shimmer effect on hover. */
+}
+
+.controls button:active {
+    transform: translateY(0); /* Reset position when clicked. */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Reduced shadow when active. */
 }

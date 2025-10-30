@@ -7,27 +7,48 @@
     ); /* Minimum width is responsive to viewport, with a fixed minimum. */
     display: flex; /* Uses flexbox layout for vertical alignment of child elements. */
     flex-direction: column; /* Children are stacked vertically. */
-    gap: 2.75%; /* Vertical space between child elements. */
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); /* Subtle gradient background */
-    border-radius: 12px; /* Rounded corners for modern look */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
-    padding: 16px; /* Padding inside the group container */
-    transition: all 0.3s ease; /* Smooth transitions for hover effects */
-    border: 1px solid #e9ecef; /* Subtle border */
+    gap: 12px; /* Fixed vertical space between child elements. */
+    background: rgba(255, 255, 255, 0.05); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Glass morphism effect */
+    border-radius: 16px; /* More rounded corners for modern look */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1); /* Enhanced shadow for depth */
+    padding: 20px; /* Increased padding inside the group container */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transitions for hover effects */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border with transparency */
+    position: relative;
+    overflow: hidden;
 }
 
 .group:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2); /* Enhanced shadow on hover */
     transform: translateY(-2px); /* Slight lift effect */
+    border-color: rgba(102, 126, 234, 0.3); /* Border color change on hover */
+}
+
+.group::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.group:hover::before {
+    opacity: 1; /* Show gradient overlay on hover. */
 }
 
 .group__header {
     display: flex; /* Flexbox layout for horizontal alignment of header elements. */
     justify-content: space-between; /* Space distributed between header elements. */
     align-items: center; /* Center items vertically */
-    margin-bottom: 12px; /* Space below header */
-    padding-bottom: 8px; /* Padding below header */
-    border-bottom: 1px solid #dee2e6; /* Subtle separator line */
+    margin-bottom: 16px; /* Space below header */
+    padding-bottom: 12px; /* Padding below header */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator line */
 }
 
 .group__information {
@@ -38,18 +59,21 @@
 
 .group__title {
     white-space: nowrap; /* Prevents the title from wrapping and keeps it on a single line. */
-    font-weight: 600; /* Semi-bold font weight */
-    font-size: 16px; /* Slightly larger font size */
-    color: #495057; /* Darker color for better readability */
+    font-weight: 700; /* Bold font weight */
+    font-size: 18px; /* Larger font size */
+    color: rgba(255, 255, 255, 0.9); /* Light text color for better contrast */
+    letter-spacing: -0.5px; /* Tighter letter spacing */
 }
 
 .group__count {
-    background-color: #e9ecef; /* Light background for count badge */
-    color: #6c757d; /* Gray color for count */
-    padding: 2px 8px; /* Padding for badge */
-    border-radius: 12px; /* Rounded badge */
-    font-size: 12px; /* Smaller font for count */
-    font-weight: 500; /* Medium weight */
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2)); /* Gradient background for count badge */
+    color: rgba(255, 255, 255, 0.9); /* Light text color */
+    padding: 4px 12px; /* Increased padding for badge */
+    border-radius: 20px; /* More rounded badge */
+    font-size: 13px; /* Slightly larger font for count */
+    font-weight: 600; /* Bold weight */
+    backdrop-filter: blur(5px); /* Glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
 }
 
 .group__actions {
@@ -59,17 +83,17 @@
 }
 
 .group__actions > svg {
-    color: #6c757d; /* Consistent gray color */
+    color: rgba(255, 255, 255, 0.6); /* Lighter color for icons */
     cursor: pointer; /* Change to pointer for better UX */
     font-size: 18px; /* Slightly larger icons */
-    padding: 4px; /* Padding for hover area */
-    border-radius: 4px; /* Rounded hover area */
+    padding: 6px; /* Increased padding for hover area */
+    border-radius: 8px; /* More rounded hover area */
     transition: all 0.2s ease; /* Smooth transitions */
 }
 
 .group__actions > svg:hover {
-    background-color: #f8f9fa; /* Light background on hover */
-    color: #495057; /* Darker color on hover */
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background on hover */
+    color: rgba(255, 255, 255, 0.9); /* Lighter color on hover */
 }
 
 .group__tickets {

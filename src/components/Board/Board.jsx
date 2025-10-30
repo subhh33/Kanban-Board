@@ -136,7 +136,7 @@ const Board = () => {
             {isLoading && (
                 <div className={classes.loading}>
                     <div className={classes.spinner}></div>
-                    <p>Loading your tasks...</p>
+                    <p className={classes.loadingText}>Loading your tasks...</p>
                 </div>
             )}
             {rawData && (

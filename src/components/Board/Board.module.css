@@ -1,37 +1,83 @@
 /* Board.module.css: Stylesheet for the board layout of the application. */
 
 .board {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Modern gradient background */
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); /* Modern dark gradient background */
     min-height: 100vh; /* Full viewport height */
     display: flex; /* Flexbox layout */
     flex-direction: column; /* Column direction for header and content */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
-    color: #333; /* Text color */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* Modern system font stack */
+    color: #e0e0e0; /* Light text color for better contrast */
+    position: relative;
+    overflow: hidden;
+}
+
+.board::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.3), transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.2), transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.board > * {
+    position: relative;
+    z-index: 2;
 }
 
 .header {
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
-    padding: 20px; /* Padding */
-    text-align: center; /* Center align */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background: rgba(255, 255, 255, 0.05); /* Semi-transparent white background */
+    backdrop-filter: blur(10px); /* Glass morphism effect */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 24px 32px; /* Increased padding */
+    text-align: center;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
 }
 
 .header h1 {
-    margin: 0; /* Remove default margin */
+    margin: 0;
     font-size: 2.5rem; /* Large font size */
-    font-weight: 300; /* Light weight */
-    color: white; /* White text */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow */
+    font-weight: 700; /* Bold weight for modern look */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 20px rgba(102, 126, 234, 0.4); /* Subtle glow */
+    letter-spacing: -0.5px; /* Tighter letter spacing */
 }
 
 .groupsContainer {
     display: flex; /* Flex layout for groups */
-    gap: max(2.5%, 36px); /* Space between groups */
+    gap: max(1.5%, 24px); /* Reduced gap for tighter spacing */
     padding: max(2%, 28.797px) max(2.5%, 36px); /* Padding */
     flex: 1; /* Take remaining space */
-    overflow: auto; /* Scroll if needed */
-    background: rgba(255, 255, 255, 0.05); /* Slight background */
-    border-radius: 10px 10px 0 0; /* Rounded top corners */
+    overflow-x: auto; /* Horizontal scroll */
+    overflow-y: hidden; /* Hide vertical scroll */
+    background: rgba(255, 255, 255, 0.02); /* Slight background */
+    position: relative;
+}
+
+.groupsContainer::-webkit-scrollbar {
+    height: 8px; /* Custom scrollbar height */
+}
+
+.groupsContainer::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1); /* Track background */
+    border-radius: 4px;
+}
+
+.groupsContainer::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3); /* Thumb background */
+    border-radius: 4px;
+}
+
+.groupsContainer::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5); /* Hover effect */
 }
 
 .loading {
@@ -40,22 +86,50 @@
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically */
     flex: 1; /* Take space */
-    color: white; /* White text */
+    color: rgba(255, 255, 255, 0.8); /* Slightly transparent white text */
+    min-height: 300px;
+}
+
+.loadingText {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out 0.3s forwards;
 }
 
 .spinner {
-    width: 50px; /* Size */
-    height: 50px; /* Size */
-    border: 5px solid rgba(255, 255, 255, 0.3); /* Border */
-    border-top: 5px solid white; /* Top border */
+    width: 60px; /* Size */
+    height: 60px; /* Size */
+    border: 4px solid rgba(255, 255, 255, 0.1); /* Border */
+    border-top: 4px solid #667eea; /* Top border with gradient color */
     border-radius: 50%; /* Circle */
-    animation: spin 1s linear infinite; /* Spin animation */
-    margin-bottom: 20px; /* Space below */
+    animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; /* Smooth spin animation */
+    position: relative;
+}
+
+.spinner::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    border: 4px solid transparent;
+    border-top: 4px solid #764ba2;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite reverse;
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .error {
@@ -64,35 +138,71 @@
     align-items: center; /* Center */
     justify-content: center; /* Center */
     flex: 1; /* Take space */
-    background: rgba(255, 255, 255, 0.9); /* Light background */
-    padding: 40px; /* Padding */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow */
-    margin: 20px; /* Margin */
+    background: rgba(255, 255, 255, 0.08); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Glass morphism effect */
+    padding: 60px; /* Increased padding */
+    border-radius: 16px; /* More rounded corners */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1); /* Enhanced shadow */
+    margin: 40px; /* Increased margin */
     text-align: center; /* Center text */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
 }
 
 .error h2 {
-    color: #e74c3c; /* Red color */
-    margin-bottom: 10px; /* Space */
+    color: #ff6b6b; /* Modern red color */
+    margin-bottom: 16px; /* Space */
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); /* Gradient text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .error p {
-    color: #555; /* Gray text */
-    margin-bottom: 20px; /* Space */
+    color: rgba(255, 255, 255, 0.7); /* Semi-transparent white text */
+    margin-bottom: 24px; /* Space */
+    font-size: 1.1rem;
+    line-height: 1.5;
+    max-width: 400px;
 }
 
 .retryButton {
-    background: #3498db; /* Blue background */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background */
     color: white; /* White text */
     border: none; /* No border */
-    padding: 10px 20px; /* Padding */
-    border-radius: 5px; /* Rounded */
+    padding: 12px 32px; /* Increased padding */
+    border-radius: 12px; /* More rounded */
     cursor: pointer; /* Pointer cursor */
     font-size: 1rem; /* Font size */
-    transition: background 0.3s; /* Transition */
+    font-weight: 600; /* Bold text */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transition */
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); /* Subtle glow */
+    position: relative;
+    overflow: hidden;
+}
+
+.retryButton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
 }
 
 .retryButton:hover {
-    background: #2980b9; /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6); /* Enhanced shadow */
+}
+
+.retryButton:hover::before {
+    left: 100%; /* Shimmer effect */
+}
+
+.retryButton:active {
+    transform: translateY(0); /* Reset position */
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.4); /* Reduced shadow */
 }

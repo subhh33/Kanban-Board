@@ -1,31 +1,64 @@
 /* Ticket.module.css: Stylesheet for individual ticket components. */
 
 .ticket {
-    border: 1px solid lightgray; /* Border around each ticket for definition. */
-    background: #fefffe; /* Light background for the ticket content. */
-    border-radius: 7.5px; /* Rounded corners for visual appeal. */
-    box-shadow: 0 0 7.5px 1.5px lightgray; /* Subtle shadow for depth. */
-    padding: 0 5%; /* Padding inside the ticket, mostly horizontal. */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border with transparency. */
+    background: rgba(255, 255, 255, 0.08); /* Semi-transparent dark background. */
+    backdrop-filter: blur(10px); /* Glass morphism effect. */
+    border-radius: 12px; /* More rounded corners for modern look. */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1); /* Enhanced depth with inner shadow. */
+    padding: 16px; /* Increased padding for better spacing. */
     display: flex; /* Enables flexible box layout. */
     flex-direction: column; /* Stacks child elements vertically. */
-    justify-content: space-evenly; /* Distributes children evenly along the column. */
-    height: max(10vh, 92px); /* Responsive height, with a minimum value. */
+    justify-content: space-between; /* Distributes children along the column with better spacing. */
+    min-height: 120px; /* Slightly larger minimum height. */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transition for hover effects. */
+    cursor: pointer; /* Pointer cursor to indicate interactivity. */
+    position: relative;
+    overflow: hidden;
+}
+
+.ticket::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.ticket:hover {
+    transform: translateY(-2px); /* Lift effect on hover. */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); /* Enhanced shadow on hover. */
+    border-color: rgba(102, 126, 234, 0.3); /* Border color change on hover. */
+}
+
+.ticket:hover::before {
+    opacity: 1; /* Show gradient overlay on hover. */
 }
 
 .ticket__id-and-user {
     display: flex; /* Flex container for the ticket ID and user info. */
     justify-content: space-between; /* Spacing out the ID and user info. */
     align-items: center; /* Vertically centering items within this container. */
+    margin-bottom: 12px; /* Space below this section. */
 }
 
 .ticket__id {
-    color: gray; /* Sets the color of the ticket ID to gray for subtlety. */
+    color: rgba(255, 255, 255, 0.6); /* Light gray color for the ticket ID. */
+    font-size: 0.875rem; /* Slightly smaller font size. */
+    font-weight: 500; /* Medium weight. */
+    letter-spacing: 0.05em; /* Slightly increased letter spacing. */
 }
 
 .ticket__status-and-title {
     display: flex; /* Flex container for the ticket status and title. */
-    gap: 1.75%; /* Space between status icon and title. */
-    align-items: center; /* Vertically centers the status icon and title. */
+    gap: 10px; /* Fixed gap for consistency. */
+    align-items: flex-start; /* Align to top for better readability. */
+    margin-bottom: 12px; /* Space below this section. */
 }
 
 .ticket__title {
@@ -34,28 +67,45 @@
     -webkit-line-clamp: 2; /* Limits text to two lines. */
     line-clamp: 2; /* Standard property for line clamping. */
     -webkit-box-orient: vertical; /* Sets the direction for the line clamp. */
+    font-size: 1rem; /* Standard font size. */
+    font-weight: 600; /* Bold weight for emphasis. */
+    color: rgba(255, 255, 255, 0.9); /* Light white color for text. */
+    line-height: 1.4; /* Better line height for readability. */
+    flex: 1; /* Take available space. */
 }
 
 .ticket__priority-and-tag {
     display: flex; /* Flex container for the ticket priority and tags. */
-    gap: 2.25%; /* Space between priority icon and tags. */
+    gap: 8px; /* Fixed gap for consistency. */
     align-items: center; /* Vertically centers the priority icon and tag containers. */
+    flex-wrap: wrap; /* Allow wrapping for multiple tags. */
 }
 
 .ticket__priority-and-tag > div {
-    border: 1px solid whitesmoke; /* Border for tag elements for distinction. */
-    padding: 1%; /* Padding within each tag element. */
-    border-radius: 5px; /* Rounded corners for each tag. */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border with transparency. */
+    background: rgba(255, 255, 255, 0.05); /* Slight background. */
+    padding: 4px 8px; /* Padding within each tag element. */
+    border-radius: 8px; /* More rounded corners for modern look. */
+    font-size: 0.75rem; /* Smaller font size for tags. */
+    transition: all 0.2s ease; /* Smooth transition for hover effects. */
+}
+
+.ticket__priority-and-tag > div:hover {
+    background: rgba(255, 255, 255, 0.1); /* Slightly darker on hover. */
+    border-color: rgba(102, 126, 234, 0.3); /* Border color change on hover. */
 }
 
 .ticket__tag {
-    color: gray; /* Color for the tag text. */
+    color: rgba(255, 255, 255, 0.7); /* Lighter color for tag text. */
     display: flex; /* Flex container for the tag and bullet icon. */
-    gap: 3%; /* Space between the bullet icon and tag text. */
+    gap: 4px; /* Space between the bullet icon and tag text. */
     white-space: nowrap; /* Keeps the tag text on a single line. */
-    font-size: smaller; /* Smaller font size for tag text to differentiate from other content. */
+    font-size: 0.75rem; /* Smaller font size for tag text. */
+    align-items: center; /* Center items vertically. */
+    font-weight: 500; /* Medium weight. */
 }
 
 .ticket__bullet {
-    color: silver; /* Color for the bullet icon. */
+    color: rgba(255, 255, 255, 0.4); /* More subtle color for the bullet icon. */
+    font-size: 0.6rem; /* Smaller size for bullet. */
 }
