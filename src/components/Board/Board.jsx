@@ -88,25 +88,15 @@ const Board = () => {
         setIsLoading(true); // Indicate the start of data fetching
         
         try {
-            // First, check if data is available in IndexedDB and not expired
-            // const cachedData = await getDataWithExpiry();
-            // const cachedData=[];
-            
-            // if (cachedData) {
-            //     setRawData(cachedData); // Set the data from IndexedDB if available
-            //     console.log('Data loaded from IndexedDB');
-            // } else {
-                // If no cached data or expired, fetch from the API
-                const response = await fetch(
-                    "https://api.quicksell.co/v1/internal/frontend-assignment"
-                );
-                const data = await response.json(); // Parse the JSON data from response
-                setRawData(data); // Set the fetched data into state
+            const response = await fetch(
+                "https://api.quicksell.co/v1/internal/frontend-assignment"
+            );
+            const data = await response.json(); // Parse the JSON data from response
+            setRawData(data); // Set the fetched data into state
 
-                // Store the new data in IndexedDB with a 2-hour expiry
-                storeDataWithExpiry(data, 2);
-                console.log('Data fetched from API and stored in IndexedDB');
-            // }
+            // Store the new data in IndexedDB with a 2-hour expiry
+            storeDataWithExpiry(data, 2);
+            console.log('Data fetched from API and stored in IndexedDB');
         } catch (error) {
             setError(
                 "Unable to load data. Please check your internet connection or try again later as the server may be down."
